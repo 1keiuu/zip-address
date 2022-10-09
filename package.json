@@ -1,0 +1,20 @@
+{
+  "name": "zip-address",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/1keiuu/zip-address.git",
+  "author": "1keiuu <ikkei12.h@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.8.3",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@types/csv-parse": "^1.2.2",
+    "@types/iconv-lite": "^0.0.1",
+    "csv-parse": "^5.3.0",
+    "fs": "^0.0.1-security",
+    "iconv-lite": "^0.6.3",
+    "path": "^0.12.7"
+  }
+}
