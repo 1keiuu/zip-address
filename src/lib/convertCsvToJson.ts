@@ -71,6 +71,18 @@ const updateFromDeleteFile = async (filePath: string) => {
  * @param filePath 追加対象のファイルパス
  */
 const insertAllData = async (filePath: string) => {
+  const file = readFileSync(resolve(__dirname, filePath));
+  const address = await parseCsv(file);
+  writeFileSync(
+    resolve(__dirname, `../../assets/address.json`),
+    JSON.stringify(address)
+  );
+};
+/**
+ * 指定したファイルのデータを都道府県別にjsonに追加する(初期化用)
+ * @param filePath 追加対象のファイルパス
+ */
+const insertAllDataGroupByPrefecture = async (filePath: string) => {
   const source = resolve(__dirname, filePath);
   const file = readFileSync(source);
   const address = await parseCsv(file);
@@ -81,11 +93,10 @@ const insertAllData = async (filePath: string) => {
     const fileIndex = prefectures.indexOf(addressByPref[i][0]) + 1;
 
     writeFileSync(
-      resolve(__dirname, `assets/address/${fileIndex}.json`),
+      resolve(__dirname, `../../assets/address/${fileIndex}.json`),
       JSON.stringify(addressByPref[i][1])
     );
   }
 };
 
-updateFromAddFile('../../assets/address/ADD_2209.CSV');
-// updateFromDeleteFile('../../assets/address/DEL_2209.CSV');
+insertAllData('../../assets/sample/KEN_ALL.CSV');
