@@ -3,7 +3,7 @@ import { parse } from 'csv-parse';
 import { decode } from 'iconv-lite';
 import { finished } from 'stream/promises';
 
-type Address = {
+export type Address = {
   zipCode: string;
   prefectureKana: string;
   cityKana: string;
