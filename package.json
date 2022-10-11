@@ -1,12 +1,12 @@
 {
   "name": "zip-address",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "https://github.com/1keiuu/zip-address.git",
   "author": "1keiuu <ikkei12.h@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npx tsc --outDir dist --resolveJsonModule"
+    "build": "npx tsc --resolveJsonModule"
   },
   "devDependencies": {
     "typescript": "^4.8.4"
