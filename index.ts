@@ -1,5 +1,3 @@
-import address from './assets/address.json';
-
 export type Address = {
   zipCode: string;
   prefectureKana: string;
@@ -15,20 +13,16 @@ function format(input: string | number) {
   return input.toString().replace('-', '');
 }
 
-export function toAddress(input: string | number) {
+export async function toAddress(input: string | number) {
   const formatted = format(input);
   if (formatted === null) return '';
-  const res = (address as Address[]).find((a) => {
-    return a.zipCode === formatted;
+  const zipCode3 = formatted.substring(0, 3);
+
+  return import(`./assets/address/${zipCode3}.json`).then((address) => {
+    const res = (address.default as Address[]).find((a) => {
+      return a.zipCode === formatted;
+    });
+    if (!res) return null;
+    return res;
   });
-  if (!res) return null;
-  return {
-    zipCode: res.zipCode,
-    prefectureKana: res.prefectureKana,
-    cityKana: res.cityKana,
-    streetKana: res.streetKana,
-    prefecture: res.prefecture,
-    city: res.city,
-    street: res.street,
-  };
 }
