@@ -44,11 +44,7 @@ function toAddress(input) {
         if (formatted === null)
             return '';
         const zipCode3 = formatted.substring(0, 3);
-<<<<<<< HEAD
-        return Promise.resolve().then(() => __importStar(require(`./assets/address/${zipCode3}.json`))).then((address) => {
-=======
         return Promise.resolve().then(() => __importStar(require(`./assets/address/${zipCode3}.js`))).then((address) => {
->>>>>>> 8f46175 (refactor: json to update)
             const res = address.default.find((a) => {
                 return a.zipCode === formatted;
             });
