@@ -1,0 +1,19 @@
+name: File Size Report
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  pkg-size-report:
+    name: File Size Report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: compressed-size-action
+        uses: preactjs/compressed-size-action@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          pattern: "{**/assets/**,./index.js}"

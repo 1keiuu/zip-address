@@ -1,0 +1,1 @@
+module.exports=[{"zipCode":"5390000","prefectureKana":"ｵｵｻｶﾌ","cityKana":"ｵｵｻｶｼﾁｭｳｵｳｸ","streetKana":"ｲｶﾆｹｲｻｲｶﾞﾅｲﾊﾞｱｲ","prefecture":"大阪府","city":"大阪市中央区","street":"以下に掲載がない場合"}]
