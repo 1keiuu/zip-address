@@ -16,5 +16,5 @@ jobs:
         uses: preactjs/compressed-size-action@2.5.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          pattern: "**/**/",
+          pattern: "../../",
           exclude: "{**/node_modules/**,**/__tests__/**,**/jest.config.js,**/tsconfig.json,**/*.ts}"
