@@ -66,35 +66,26 @@ const updateFromDeleteFile = async (filePath: string) => {
     writeFileSync(resolve(__dirname, jsonPath), JSON.stringify(data));
   }
 };
+
 /**
- * 指定したファイルのデータを全てjsonに追加する(初期化用)
+ * 指定したファイルのデータを郵便番号前3桁別にjsonに追加する(初期化用)
  * @param filePath 追加対象のファイルパス
  */
 const insertAllData = async (filePath: string) => {
-  const file = readFileSync(resolve(__dirname, filePath));
-  const address = await parseCsv(file);
-  writeFileSync(
-    resolve(__dirname, `../../assets/address.json`),
-    JSON.stringify(address)
-  );
-};
-/**
- * 指定したファイルのデータを都道府県別にjsonに追加する(初期化用)
- * @param filePath 追加対象のファイルパス
- */
-const insertAllDataGroupByPrefecture = async (filePath: string) => {
   const source = resolve(__dirname, filePath);
   const file = readFileSync(source);
   const address = await parseCsv(file);
 
-  const addressByPref = groupBy(address, (a) => a.prefecture);
+  const addressByZip3 = groupBy(address, (a) => a.zipCode.substring(0, 3));
 
-  for (let i = 0; i < addressByPref.length; i++) {
-    const fileIndex = prefectures.indexOf(addressByPref[i][0]) + 1;
-
+  for (let i = 0; i < addressByZip3.length; i++) {
+    const fileIndex = addressByZip3[i][0];
+    const body = addressByZip3[i][1];
+    const text = `module.exports=${JSON.stringify(body)}`;
+    console.log(fileIndex);
     writeFileSync(
-      resolve(__dirname, `../../assets/address/${fileIndex}.json`),
-      JSON.stringify(addressByPref[i][1])
+      resolve(__dirname, `../../assets/address/${fileIndex}.js`),
+      text
     );
   }
 };

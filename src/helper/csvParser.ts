@@ -45,7 +45,7 @@ export const parseCsv = async (file: Buffer): Promise<Address[]> => {
         city: r[7],
         street: r[8],
       };
-    });
+    })
   });
 
   // Write data to the stream
