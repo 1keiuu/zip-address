@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14' 
+          node-version: '16' 
       - name: Package size report
         uses: pkg-size/action@v1
         env:
