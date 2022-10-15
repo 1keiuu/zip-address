@@ -18,7 +18,7 @@ export async function toAddress(input: string | number) {
   if (formatted === null) return '';
   const zipCode3 = formatted.substring(0, 3);
 
-  return import(`./assets/address/${zipCode3}.json`).then((address) => {
+  return import(`./assets/address/${zipCode3}.js`).then((address) => {
     const res = (address.default as Address[]).find((a) => {
       return a.zipCode === formatted;
     });
