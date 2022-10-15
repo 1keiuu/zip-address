@@ -43,13 +43,8 @@ function toAddress(input) {
         const formatted = format(input);
         if (formatted === null)
             return '';
-        const zip3 = formatted.substring(0, 3);
-        // const json = await axios(
-        //   'https://storage.googleapis.com/portfolio21-56e7e.appspot.com/address.json.gz'
-        // ).then((res) => {
-        //   console.log(res);
-        // });
-        return Promise.resolve().then(() => __importStar(require(`./assets/address/${zip3}.json`))).then((address) => {
+        const zipCode3 = formatted.substring(0, 3);
+        return Promise.resolve().then(() => __importStar(require(`./assets/address/${zipCode3}.json`))).then((address) => {
             const res = address.default.find((a) => {
                 return a.zipCode === formatted;
             });
@@ -57,25 +52,6 @@ function toAddress(input) {
                 return null;
             return res;
         });
-        // var plain = Zlib.inflateSync(c);
-        // const a = plain.decompress();
-        // console.log(a);
-        // var plain = inflate.decompress();
-        // console.log(inflate);
-        // console.log(plain);
-        // if (!res) return null;
-        // return {
-        //   zipCode: res.zipCode,
-        //   prefectureKana: res.prefectureKana,
-        //   cityKana: res.cityKana,
-        //   streetKana: res.streetKana,
-        //   prefecture: res.prefecture,
-        //   city: res.city,
-        //   street: res.street,
-        // };
     });
 }
 exports.toAddress = toAddress;
-toAddress('1670042').then((res) => {
-    console.log(res);
-});

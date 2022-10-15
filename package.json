@@ -6,7 +6,7 @@
   "author": "1keiuu <ikkei12.h@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npx tsc --resolveJsonModule",
+    "build": "npx tsc",
     "test": "jest"
   },
   "devDependencies": {
