@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16' 
-
+      - run: npm ci 
       - name: Package size report
         uses: pkg-size/action@v1
         env:
