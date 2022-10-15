@@ -52,7 +52,6 @@ function toAddress(input) {
             const res = address.default.find((a) => {
                 return a.zipCode === formatted;
             });
-            console.log(res);
             if (!res)
                 return null;
             return res;
