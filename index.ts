@@ -13,9 +13,11 @@ function format(input: string | number) {
   return input.toString().replace('-', '');
 }
 
-export async function toAddress(input: string | number) {
+export async function toAddress(
+  input: string | number
+): Promise<Address | null> {
   const formatted = format(input);
-  if (formatted === null) return '';
+  if (formatted === null) return null;
   const zipCode3 = formatted.substring(0, 3);
 
   return import(`./assets/address/${zipCode3}.js`).then((address) => {
