@@ -1,4 +1,3 @@
-"use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -31,27 +30,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.toAddress = void 0;
-function format(input) {
-    if (typeof input !== 'string' && typeof input !== 'number')
-        return null;
-    return input.toString().replace('-', '');
-}
-function toAddress(input) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const formatted = format(input);
-        if (formatted === null)
-            return '';
-        const zipCode3 = formatted.substring(0, 3);
-        return Promise.resolve().then(() => __importStar(require(`./assets/address/${zipCode3}.js`))).then((address) => {
-            const res = address.default.find((a) => {
-                return a.zipCode === formatted;
-            });
-            if (!res)
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __syncRequire = typeof module === "object" && typeof module.exports === "object";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.toAddress = void 0;
+    function format(input) {
+        if (typeof input !== 'string' && typeof input !== 'number')
+            return null;
+        return input.toString().replace('-', '');
+    }
+    function toAddress(input) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            const formatted = format(input);
+            if (formatted === null)
                 return null;
-            return res;
+            const zipCode3 = formatted.substring(0, 3);
+            return (_a = `./assets/address/${zipCode3}.js`, __syncRequire ? Promise.resolve().then(() => __importStar(require(_a))) : new Promise((resolve_1, reject_1) => { require([_a], resolve_1, reject_1); }).then(__importStar)).then((address) => {
+                const res = address.default.find((a) => {
+                    return a.zipCode === formatted;
+                });
+                if (!res)
+                    return null;
+                return res;
+            });
         });
-    });
-}
-exports.toAddress = toAddress;
+    }
+    exports.toAddress = toAddress;
+});
