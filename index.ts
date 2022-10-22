@@ -13,18 +13,17 @@ function format(input: string | number) {
   return input.toString().replace('-', '');
 }
 
-export async function toAddress(
-  input: string | number
-): Promise<Address | null> {
+async function fetchAddress(input: string | number): Promise<Address | null> {
   const formatted = format(input);
   if (formatted === null) return null;
   const zipCode3 = formatted.substring(0, 3);
+  const res = await fetch(
+    `https://cdn.jsdelivr.net/npm/zip-address/assets/address/${zipCode3}.json`
+  );
+  if (!res) return null;
+  return res.json();
+}
 
-  return import(`./assets/address/${zipCode3}.js`).then((address) => {
-    const res = (address.default as Address[]).find((a) => {
-      return a.zipCode === formatted;
-    });
-    if (!res) return null;
-    return res;
-  });
+export function toAddress(input: string | number): Promise<Address | null> {
+  return fetchAddress(input);
 }
