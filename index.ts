@@ -16,6 +16,8 @@ function format(input: string | number) {
 async function fetchAddress(input: string | number): Promise<Address | null> {
   const formatted = format(input);
   if (formatted === null) return null;
+  if (formatted.length !== 7) throw 'zip code must be 7 characters.';
+
   const zipCode3 = formatted.substring(0, 3);
 
   const res = await fetch(
