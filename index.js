@@ -30,10 +30,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             if (formatted === null)
                 return null;
             const zipCode3 = formatted.substring(0, 3);
-            const res = yield fetch(`https://cdn.jsdelivr.net/npm/zip-address/assets/address/${zipCode3}.json`);
+            const res = yield fetch(`https://cdn.jsdelivr.net/npm/zip-address-data/address/${zipCode3}.json`)
+                .then((res) => {
+                return res.json();
+            })
+                .then((body) => {
+                return body.find((address) => {
+                    return address.zipCode === formatted;
+                });
+            });
             if (!res)
                 return null;
-            return res.json();
+            return res;
         });
     }
     function toAddress(input) {

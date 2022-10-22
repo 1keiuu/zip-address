@@ -18,10 +18,19 @@ async function fetchAddress(input: string | number): Promise<Address | null> {
   if (formatted === null) return null;
   const zipCode3 = formatted.substring(0, 3);
   const res = await fetch(
-    `https://cdn.jsdelivr.net/npm/zip-address/assets/address/${zipCode3}.json`
-  );
+    `https://cdn.jsdelivr.net/npm/zip-address-data/address/${zipCode3}.json`
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .then((body: Address[]) => {
+      return body.find((address) => {
+        return address.zipCode === formatted;
+      });
+    });
+
   if (!res) return null;
-  return res.json();
+  return res;
 }
 
 export function toAddress(input: string | number): Promise<Address | null> {
