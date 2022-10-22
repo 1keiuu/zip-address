@@ -6,7 +6,7 @@ import { toAddress } from '../../../index.ts';
 function App() {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    toAddress('167-0042').then((res) => {
+    toAddress('167042').then((res) => {
       console.log(res);
     });
   }, []);
