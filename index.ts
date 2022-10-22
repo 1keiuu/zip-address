@@ -1,5 +1,3 @@
-import axios, { AxiosResponse } from 'axios';
-
 export type Address = {
   zipCode: string;
   prefectureKana: string;
@@ -20,12 +18,14 @@ async function fetchAddress(input: string | number): Promise<Address | null> {
   if (formatted === null) return null;
   const zipCode3 = formatted.substring(0, 3);
 
-  const res = await axios
-    .get(
-      `https://cdn.jsdelivr.net/npm/zip-address-data/address/${zipCode3}.json`
-    )
-    .then((res: AxiosResponse<Address[]>) => {
-      return res.data.find((address) => {
+  const res = await fetch(
+    `https://cdn.jsdelivr.net/npm/zip-address-data/address/${zipCode3}.json`
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .then((data: Address[]) => {
+      return data.find((address) => {
         return address.zipCode === formatted;
       });
     });
