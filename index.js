@@ -7,18 +7,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+        define(["require", "exports", "axios"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.toAddress = void 0;
+    const axios_1 = __importDefault(require("axios"));
     function format(input) {
         if (typeof input !== 'string' && typeof input !== 'number')
             return null;
@@ -30,12 +34,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             if (formatted === null)
                 return null;
             const zipCode3 = formatted.substring(0, 3);
-            const res = yield fetch(`https://cdn.jsdelivr.net/npm/zip-address-data/address/${zipCode3}.json`)
+            const res = yield axios_1.default
+                .get(`https://cdn.jsdelivr.net/npm/zip-address-data/address/${zipCode3}.json`)
                 .then((res) => {
-                return res.json();
-            })
-                .then((body) => {
-                return body.find((address) => {
+                return res.data.find((address) => {
                     return address.zipCode === formatted;
                 });
             });

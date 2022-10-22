@@ -1,13 +1,15 @@
 import { toAddress } from '../index';
 
 test('toAddress', async () => {
-  expect(await toAddress(1670042)).toEqual({
-    zipCode: '1670042',
-    prefectureKana: 'ﾄｳｷｮｳﾄ',
-    cityKana: 'ｽｷﾞﾅﾐｸ',
-    streetKana: 'ﾆｼｵｷﾞｷﾀ',
-    prefecture: '東京都',
-    city: '杉並区',
-    street: '西荻北',
+  await toAddress(1000001).then((res) => {
+    expect(res).toEqual({
+      city: '千代田区',
+      cityKana: 'ﾁﾖﾀﾞｸ',
+      prefecture: '東京都',
+      prefectureKana: 'ﾄｳｷｮｳﾄ',
+      street: '千代田',
+      streetKana: 'ﾁﾖﾀﾞ',
+      zipCode: '1000001',
+    });
   });
 });
